@@ -9,7 +9,6 @@ function App() {
   const [isStart, setIsStart] = useState(false);
   const [timerLabel, setTimerLabel] = useState('Session');
 
-
   // useEffect hook for updating timer label, countdown value and display
   useEffect(() => {
     if (isStart) {
@@ -55,12 +54,11 @@ function App() {
     }
   }, [isStart, timeLeft, timerLabel, sessionLength, breakLength]);
 
-  
   function playMusic() {
     let audio = document.getElementById('beep');
     audio.play();
   }
-  
+
   function resetMusic() {
     let audio = document.getElementById('beep');
     audio.pause();
@@ -140,32 +138,73 @@ function App() {
 
   return (
     <div className='App'>
-      <p id='break-label'>Break Length</p>
-      <p id='session-label'>Session Length</p>
-      <button id='break-decrement' onClick={decrementBreakLength}>
-        dec break
-      </button>
-      <button id='session-decrement' onClick={decrementSessionLength}>
-        dec session
-      </button>
-      <button id='break-increment' onClick={incrementBreakLength}>
-        inc break
-      </button>
-      <button id='session-increment' onClick={incrementSessionLength}>
-        inc session
-      </button>
-      <p id='break-length'>{breakLength}</p>
-      <p id='session-length'>{sessionLength}</p>
-      <p id='timer-label'>{timerLabel}</p>
-      <p id='time-left'>{timeLeftDisplay}</p>
-      <button id='start_stop' onClick={startStop}>
-        Start/Stop
-      </button>
-      <button id='reset' onClick={reset}>
-        reset
-      </button>
-      <audio id='beep' preload="auto" crossOrigin="anonymous">
-        <source src='assets/beep.mp3' type="audio/mpeg" />
+      <div className='settings-container d-flex flex-row justify-content-center align-items-center'>
+        <div className='break-length-container'>
+          <button
+            className='btn btn-danger'
+            id='break-decrement'
+            onClick={decrementBreakLength}
+          >
+            <i className='bi bi-dash-lg'></i>
+          </button>
+          <button
+            className='btn btn-success'
+            id='break-increment'
+            onClick={incrementBreakLength}
+          >
+            <i className='bi bi-plus'></i>
+          </button>
+          <p id='break-label'>Break Length</p>
+          <p id='break-length' className='fs-1'>
+            {breakLength}
+          </p>
+        </div>
+        <div className='d-flex' style={{ height: '200px' }}>
+          <div className='vr'></div>
+        </div>
+        <div className='session-length-container'>
+          <button
+            className='btn btn-danger'
+            id='session-decrement'
+            onClick={decrementSessionLength}
+          >
+            <i className='bi bi-dash-lg'></i>
+          </button>
+          <button
+            className='btn btn-success'
+            id='session-increment'
+            onClick={incrementSessionLength}
+          >
+            <i className='bi bi-plus'></i>
+          </button>
+          <p id='session-label'>Session Length</p>
+          <p id='session-length' className='fs-1'>
+            {sessionLength}
+          </p>
+        </div>
+      </div>
+      <div className='timer-container'>
+        <p id='timer-label' className='fs-4'>
+          {timerLabel}
+        </p>
+        <p id='time-left' className='fs-1'>
+          {timeLeftDisplay}
+        </p>
+        <div className='mt-4'>
+          <button
+            className='btn btn-warning'
+            id='start_stop'
+            onClick={startStop}
+          >
+            Start/Stop
+          </button>
+          <button className='btn btn-secondary' id='reset' onClick={reset}>
+            Reset
+          </button>
+        </div>
+      </div>
+      <audio id='beep' preload='auto' crossOrigin='anonymous'>
+        <source src='assets/beep.mp3' type='audio/mpeg' />
       </audio>
     </div>
   );
