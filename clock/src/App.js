@@ -9,6 +9,8 @@ function App() {
   const [isStart, setIsStart] = useState(false);
   const [timerLabel, setTimerLabel] = useState('Session');
 
+
+  // useEffect hook for updating timer label, countdown value and display
   useEffect(() => {
     if (isStart) {
       let timer = setInterval(() => {
@@ -18,15 +20,13 @@ function App() {
           setTimeLeft(updatedTimeLeft);
           let updatedTimeLeftDisplay = formatTime(updatedTimeLeft);
           setTimeLeftDisplay(updatedTimeLeftDisplay);
-          console.log(updatedTimeLeft, updatedTimeLeftDisplay);
         }
 
         if (timeLeft === 0) {
-          playAudio();
+          playMusic();
           let updatedTimeLeft = timeLeft - 1;
           setTimeLeft(updatedTimeLeft);
           let updatedTimeLeftDisplay = formatTime(0);
-          console.log('time left is 0, new display', updatedTimeLeftDisplay);
           setTimeLeftDisplay(updatedTimeLeftDisplay);
         }
         if (timeLeft === -1) {
@@ -48,7 +48,6 @@ function App() {
               break;
           }
           let updatedTimeLeftDisplay = formatTime(updatedTimeLeft);
-          console.log('time left is 0, new display', updatedTimeLeftDisplay);
           setTimeLeftDisplay(updatedTimeLeftDisplay);
         }
       }, 1000);
@@ -56,8 +55,20 @@ function App() {
     }
   }, [isStart, timeLeft, timerLabel, sessionLength, breakLength]);
 
+  
+  function playMusic() {
+    let audio = document.getElementById('beep');
+    audio.play();
+  }
+  
+  function resetMusic() {
+    let audio = document.getElementById('beep');
+    audio.pause();
+    audio.currentTime = 0;
+  }
+
   function reset() {
-    resetAudio();
+    resetMusic();
     setBreakLength(5);
     setSessionLength(25);
     let updatedTimeLeft = 25 * 60;
@@ -127,41 +138,6 @@ function App() {
     setIsStart(updatedIsStart);
   }
 
-  function playAudio() {
-    var audio = document.getElementById('beep');
-    var playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then((_) => {
-          // Automatic playback started!
-          // Show playing UI.
-          audio.pause();
-        })
-        .catch((error) => {
-          // Auto-play was prevented
-          // Show paused UI.
-        });
-    }
-
-  }
-
-  function resetAudio() {
-    var audio = document.getElementById('beep');
-    var playPromise = audio.pause();
-    if (playPromise !== undefined) {
-      playPromise
-        .then((_) => {
-          // Automatic playback started!
-          // Show playing UI.
-          audio.play();
-        })
-        .catch((error) => {
-          // Auto-play was prevented
-          // Show paused UI.
-        });
-    }
-  }
-
   return (
     <div className='App'>
       <p id='break-label'>Break Length</p>
@@ -188,9 +164,8 @@ function App() {
       <button id='reset' onClick={reset}>
         reset
       </button>
-      <audio id='beep'>
-        <source src='../public/beep.wav' type='audio/mpeg' />
-        Your browser does not support the audio element.
+      <audio id='beep' preload="auto" crossOrigin="anonymous">
+        <source src='assets/beep.mp3' type="audio/mpeg" />
       </audio>
     </div>
   );
