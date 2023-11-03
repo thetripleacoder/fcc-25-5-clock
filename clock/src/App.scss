@@ -6,19 +6,20 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+  font-size: 30px;
 }
 
 .settings-container {
   justify-content: center;
   display: flex;
   align-items: center;
-  border: 2px solid black;
+  // border: 2px solid black;
   padding: 0 20px 0 20px;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  -ms-border-radius: 20px;
-  -o-border-radius: 20px;
+  // border-radius: 20px;
+  // -webkit-border-radius: 20px;
+  // -moz-border-radius: 20px;
+  // -ms-border-radius: 20px;
+  // -o-border-radius: 20px;
 }
 
 .break-length-container,
@@ -32,8 +33,20 @@
 }
 
 .timer-container {
+  border: 2px solid black;
+  padding: 20px 80px;
+  border-radius: 20px;
   margin-top: 30px;
-  p {
-    margin: 0;
-  }
+}
+
+#timer-label {
+  font-size: 70px;
+}
+
+#time-left {
+  font-size: 50px;
+}
+
+#break-length, #session-length {
+  font-size: 50px;
 }

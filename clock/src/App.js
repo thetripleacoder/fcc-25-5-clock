@@ -155,7 +155,7 @@ function App() {
             <i className='bi bi-plus'></i>
           </button>
           <p id='break-label'>Break Length</p>
-          <p id='break-length' className='fs-1'>
+          <p id='break-length'>
             {breakLength}
           </p>
         </div>
@@ -178,16 +178,16 @@ function App() {
             <i className='bi bi-plus'></i>
           </button>
           <p id='session-label'>Session Length</p>
-          <p id='session-length' className='fs-1'>
+          <p id='session-length'>
             {sessionLength}
           </p>
         </div>
       </div>
       <div className='timer-container'>
-        <p id='timer-label' className='fs-4'>
+        <p id='timer-label'>
           {timerLabel}
         </p>
-        <p id='time-left' className='fs-1'>
+        <p id='time-left'>
           {timeLeftDisplay}
         </p>
         <div className='mt-4'>
